@@ -8,8 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float Speed = 2;
 
     public Rigidbody rigidbody;
-
-
+    public Transform startPoint;
+    public Transform endPoint;
+    public int zebranePunkty;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y < 0)
+        {
+            transform.position = startPoint.position;
+            rigidbody.velocity = Vector3.zero;
+        }
+
+
         if (Input.GetAxis("Horizontal") != 0)
         {
             float directionHorizontal = Input.GetAxis("Horizontal");
@@ -33,5 +41,7 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.AddForce(directionVertical * Time.deltaTime * Speed * -1, 0, 0, ForceMode.Impulse);
         }
 
+        
     }
+
 }
